@@ -18,4 +18,4 @@ jobs:
         run: docker rm -f test || true
 
       - name: Run docker container
-        run: socker run -d -p 3000:5173 --name test-container l4ner0/test
+        run: docker run -d -p 3000:5173 --name test-container l4ner0/test
