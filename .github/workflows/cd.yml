@@ -1,0 +1,21 @@
+name: CD Pipelines
+
+on:
+  workflow_run:
+    workflows: ["CI Pipelines"]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull Docker image
+        run: docker pull l4ner0/test:latest
+
+      - name: Deleted old docker container
+        run: docker rm -f test || true
+
+      - name: Run docker container
+        run: socker run -d -p 3000:5173 --name test-container l4ner0/test
